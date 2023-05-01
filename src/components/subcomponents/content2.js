@@ -2,27 +2,20 @@ import React from 'react'
 import ether from '../../Images/ether.png'
 import token from '../../Images/token.png'
 import { useNavigate } from "react-router-dom";
+import Sidebar from './Sidebar';
+import { createContext,useState } from 'react';
+
 const Content2 = () => {
+
+
     const navigate2 = useNavigate()
+    const navigate3 = useNavigate()
     return (
         <div className='flex justify-around mt-12'>
-            <div className='flex justify-around  w-1/4 '>
-                <div className='flex flex-col place-content-center ml-24'>
-                    <div className='bg-violet-600 rounded-md p-5 w-80 outline-none shadow-md font-bold text-white text-lg '>CHOOSE YOUR CRYPTO</div>
-                    <div className='w-1 h-12 ml-40 bg-white'></div>
-                    <div className='bg-gray rounded-md p-5 w-80 outline-none shadow-md font-bold text-white text-lg '>CHOOSE YOUR OPERATION</div>
-                    <div className='w-1 h-12 ml-40 bg-white'></div>
-                    <div className='bg-gray rounded-md p-5 w-80 outline-none shadow-md font-bold text-white text-lg '>CONFIRM OPERATION</div>
-                </div>
-
-                <div className='flex justify-center place-content-center'>
-                <div className='w-2 h-96 ml-20 mt-24 bg-white'></div>
-                </div>
-
-            </div>
+                <Sidebar/>
             <div className='w-3/4'>
-                <div className="choose w-max m-auto mt-10">
-                    <h1 className='bg-primary rounded-full px-10 py-5 w-96 outline-none shadow-md font-bold text-white text-2xl '>CHOOSE YOUR CRYPTO</h1>
+                <div className="choose w-max m-auto">
+                    <h1 className='bg-primary rounded-full px-16 py-5 w-max outline-none shadow-md font-bold text-white text-2xl '>CHOOSE YOUR CRYPTO</h1>
                 </div>
 
                 <div className="flex justify-around place-content-center mr-20 mt-20">
@@ -33,11 +26,11 @@ const Content2 = () => {
 
                     <div className="flex flex-col place-content-center">
                         <img src={token} alt="token not found" width={250} height={200}></img>
-                        <button className='bg-primary rounded-full p-5 w-64 m-auto outline-none shadow-md font-bold text-white text-center shadow-white text-2xl'>Token</button>
+                        <button onClick={()=>{navigate3('/token')}}className='bg-primary rounded-full p-5 w-64 m-auto outline-none shadow-md font-bold text-white text-center shadow-white text-2xl'>Token</button>
                     </div>
                 </div>
             </div>
-
+    
         </div>
     )
 }

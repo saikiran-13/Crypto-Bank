@@ -2,7 +2,7 @@ import '../App.css'
 import { Header } from "./subcomponents/header";
 import Footer from './subcomponents/footer'
 import Content2 from './subcomponents/content2';
-function Choosecrypto(props){
+function Useracccess(props){
     return(<div>
         <Header address={props.address}/>
         <Content2/>
@@ -12,4 +12,4 @@ function Choosecrypto(props){
     )
 }
 
-export default Choosecrypto
+export default Useracccess

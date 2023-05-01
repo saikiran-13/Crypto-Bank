@@ -3,6 +3,7 @@ import '../../App.css'
 import { useNavigate } from "react-router-dom";
 export default function Content() {
     const navigate = useNavigate()
+    const navigateowner = useNavigate()
     return (
         <div className='content flex justify-around place-content-around  h-full'>
 
@@ -18,8 +19,8 @@ export default function Content() {
                 </div>
 
                 <div className='btn flex text-white'>
-                    <button className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-white text-3xl font-semibold mr-20">Owner Access</button>
-                    <button className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-white text-3xl font-semibold" onClick={()=>{navigate('/choosecrypto')}}>User Access</button>
+                    <button className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-white text-3xl font-semibold mr-20 "onClick={()=>{navigateowner('/owneraccess')}}>Owner Access</button>
+                    <button className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-white text-3xl font-semibold" onClick={()=>{navigate('/useraccess')}}>User Access</button>
                 </div>
             </div>
 
