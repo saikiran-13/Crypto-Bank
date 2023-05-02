@@ -15,7 +15,7 @@ const Content2 = () => {
                 <Sidebar/>
             <div className='w-3/4'>
                 <div className="choose w-max m-auto">
-                    <h1 className='bg-primary rounded-full px-16 py-5 w-max outline-none shadow-md font-bold text-white text-2xl '>CHOOSE YOUR CRYPTO</h1>
+                    <h1 className='bg-primary rounded-md px-16 py-5 w-max outline-none shadow-md font-bold shadow-white text-white text-2xl '>CHOOSE YOUR CRYPTO</h1>
                 </div>
 
                 <div className="flex justify-around place-content-center mr-20 mt-20">
@@ -26,7 +26,7 @@ const Content2 = () => {
 
                     <div className="flex flex-col place-content-center">
                         <img src={token} alt="token not found" width={250} height={200}></img>
-                        <button onClick={()=>{navigate3('/token')}}className='bg-primary rounded-full p-5 w-64 m-auto outline-none shadow-md font-bold text-white text-center shadow-white text-2xl'>Token</button>
+                        <button onClick={()=>{navigate3('/token')}}className='bg-primary rounded-full p-5 w-64 m-auto outline-none shadow-md font-bold text-white text-center shadow-white text-2xl '>Token</button>
                     </div>
                 </div>
             </div>

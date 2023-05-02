@@ -1,16 +1,16 @@
 import React from 'react'
 import { Header } from './subcomponents/header'
 import Footer from './subcomponents/footer'
-import Ownercontent from './subcomponents/ownercontent'
+import Verify from './subcomponents/Verify'
 
-const Owneraccess = (props) => {
+const Complete = (props) => {
   return (
     <div>
         <Header address={props.address}/>
-        <Ownercontent/>
+        <Verify/>
         <Footer/>
     </div>
   )
 }
 
-export default Owneraccess
+export default Complete

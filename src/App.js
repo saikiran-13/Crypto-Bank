@@ -2,6 +2,7 @@ import './App.css';
 import Homepage from './components/homepage';
 import Useraccess from './components/useraccess';
 import Owneraccess from './components/owneraccess';
+import Complete from './components/complete';
 import Ether from './components/ether';
 import Token from './components/token';
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
@@ -19,6 +20,7 @@ function App() {
         <Route path='/useraccess' element={<Useraccess address = '0x435245...'/>}/>
         <Route path='/ether' element={<Ether address = '0x435245...' token={false}  name="ETHER"/>}/>
         <Route path='/token' element={<Token address = '0x435245...' token={true} name="TOKEN"/>}/>
+        <Route path='/complete' element = {<Complete address = '0x435245...'/>}/>
       </Routes>
     </Router>
     </div>

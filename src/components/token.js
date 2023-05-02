@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Header } from "./subcomponents/header";
-import Content3 from "./subcomponents/content3";
+import Content3 from "./subcomponents/crypto";
 import Footer from "./subcomponents/footer";
 
 import '../App.css'
