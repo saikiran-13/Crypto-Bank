@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Modal, Box, Typography, Button, TextField, IconButton } from '@mui/material';
 import { Cancel, Check } from '@mui/icons-material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { balanceContext } from '../../App';
 
 const theme = createTheme({
   palette: {
@@ -15,7 +16,8 @@ const theme = createTheme({
   },
 });
 
-export const ConfirmBox = ({ value, handleClose,text,name }) => {
+export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
+  const {setOperation,setType,setAmount} = useContext(balanceContext)
   const navigate = useNavigate()
   return (
     <ThemeProvider theme={theme}>
@@ -47,8 +49,8 @@ export const ConfirmBox = ({ value, handleClose,text,name }) => {
             <Typography variant="h6" component="h2" sx={{ color: '#86c232', marginBottom: '20px', fontWeight: 'bold' }}>
               {text} {name}
             </Typography>
-           {name == "TOKEN" && <TextField label="Token Address" variant="outlined" fullWidth margin="normal" />} 
-            <TextField label="Amount" variant="outlined" fullWidth margin="normal" />
+            {name == "TOKEN" && <TextField label="Token Address" variant="outlined" fullWidth margin="normal" />}
+            {text != "CHECK" && <TextField label="Amount" onChange={(event)=>{setAmount(event.target.value)}} variant="outlined" fullWidth margin="normal" />}
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: 550, height: 100, mt: 2 }}>
               <Button
                 variant="outlined"
@@ -59,7 +61,11 @@ export const ConfirmBox = ({ value, handleClose,text,name }) => {
               </Button>
               <Button
                 variant="contained"
-                onClick={()=>{navigate('/complete')}}
+                onClick={(event) => { 
+                  setType(name)
+                  setOperation(text)
+                  navigate('/complete') 
+                }}
                 sx={{ mt: 10, mr: 4, bgcolor: '#86c232', height: 40, color: 'white', fontWeight: 'bold' }}
               >
                 Confirm

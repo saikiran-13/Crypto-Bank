@@ -5,7 +5,7 @@ export default function Content() {
     const navigate = useNavigate()
     const navigateowner = useNavigate()
     return (
-        <div className='content flex justify-around place-content-around  h-full'>
+        <div className='content flex justify-around place-content-around mb-10'>
 
             <div className='flex w-3/5 flex-col m-16'>
                 <div className='flex flex-col text-white text-8xl  w-full justify-center gap-5' >
@@ -19,8 +19,8 @@ export default function Content() {
                 </div>
 
                 <div className='btn flex text-white'>
-                    <button className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-white text-3xl font-semibold mr-20 "onClick={()=>{navigateowner('/owneraccess')}}>Owner Access</button>
-                    <button className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-white text-3xl font-semibold" onClick={()=>{navigate('/useraccess')}}>User Access</button>
+                    <button className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-white text-3xl font-semibold mr-20 hover:bg-least"onClick={()=>{navigateowner('/owneraccess')}}>Owner Access</button>
+                    <button className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-white text-3xl font-semibold hover:bg-least" onClick={()=>{navigate('/useraccess')}}>User Access</button>
                 </div>
             </div>
 

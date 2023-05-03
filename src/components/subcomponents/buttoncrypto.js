@@ -13,7 +13,7 @@ const Buttoncrypto = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div className='flex justify-around place-content-center mb-14 mt-10 pt-14 gap-28'>
+    <div className='flex justify-around place-content-center mb-14 mt-10 pt-14 gap-10'>
       <div className='flex flex-col place-content-center justify-center'>
         <img className='m-auto mb-5' src={props.image} alt="image not found" width={150} height={100} />
         <Button onClick={handleOpen} sx={{

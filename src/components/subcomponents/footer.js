@@ -6,7 +6,7 @@ import discord from '../../Images/discord.png'
 
 export default function Footer(){
     return(<div>
-        <div className='footer header bg-blue h-44 mt-10  relative p-6 bottom-0 w-full'>
+        <div className='footer header bg-blue h-48 mt-14 p-6 mb-0 w-full'>
             <ul className='flex justify-around text-white text-2xl'>
                 <li className='border-b-4 border-b-black'>About</li>
                 <li className='border-b-4 border-b-black'>Payments</li>
