@@ -1,9 +1,10 @@
 import { PropaneSharp } from '@mui/icons-material'
+import { contract } from './choose'
 import '../../App.css'
 import React from 'react'
 
 const Transaction = (props) => {
-    console.log(props)
+ 
     return (
         <div >
             <div className=' content flex justify-between place-content-around p-5 w-max h-fit m-5 rounded-lg font-bold shadow-lg shadow-transparent '>

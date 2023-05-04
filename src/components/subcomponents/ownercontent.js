@@ -5,6 +5,9 @@ import token from '../../Images/token.png'
 import { useNavigate } from 'react-router-dom'
 import { useContext,useState } from 'react'
 import { balanceContext } from '../../App'
+import { contract } from './choose'
+import { signerAddress } from './content'
+const {ethers} = require('ethers')
 
 const Ownercontent = () => {
  const {setBal,setCrypto,setType} = useContext(balanceContext)
@@ -12,14 +15,17 @@ const Ownercontent = () => {
 
 
 
-  function Etherbalance(){
-      setBal(100)
+  async function Etherbalance(){
+    const balanceInWei = await contract.checkEther();
+    const balanceInEther = ethers.utils.formatEther(ethers.utils.parseUnits(balanceInWei.toString(), "wei"));
+    console.log("Balance", balanceInEther);
+      setBal(balanceInEther)
       setCrypto('Ether')
       setType('ETH')
       navigate('/balance')
   }
 
-  function Tokenbalance(){
+  async function Tokenbalance(){
       setBal(200)
       setCrypto('Token')
       setType('TKN')
