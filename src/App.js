@@ -1,43 +1,69 @@
 import './App.css';
-import Homepage from './components/homepage';
-import Useraccess from './components/useraccess';
-import Owneraccess from './components/owneraccess';
+import { Header } from './components/subcomponents/Header';
+import Footer from './components/subcomponents/Footer';
+import Homepage from './components/Homepage';
+import Useraccess from './components/Useraccess';
+import Owneraccess from './components/Owneraccess';
 import Totalbalance from './components/Balance';
-import Complete from './components/complete';
-import Ether from './components/ether';
-import Token from './components/token';
+import Complete from './components/Complete';
+import Ether from './components/Ether';
+import Token from './components/Token';
 import Transactionlog from './components/Transactionlog';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState, createContext } from 'react';
-import { Balance } from '@mui/icons-material';
-import { signerAddress } from './components/subcomponents/content';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useState, createContext, useEffect } from 'react';
 
-export const balanceContext = createContext()
+import { signerAddress } from './components/subcomponents/Homepagecontent';
+
+export const balanceContext = createContext();
+
+function ConditionalHeader({ walletaddress }) {
+  const location = useLocation();
+
+  return location.pathname !== '/' ? <Header address={walletaddress} /> : null;
+}
+
+
+
 function App() {
-  const [address, setAddress] = useState("")
-  const [bal, setBal] = useState(0)
-  const [crypto, setCrypto] = useState("")
-  const [type, setType] = useState("")
-  const [operation, setOperation] = useState("")
-  const [amount, setAmount] = useState("")
-  const Address = "0xg123fdgf".slice(0,6)+"....."
+  const [bal, setBal] = useState(0);
+  const [crypto, setCrypto] = useState("");
+  const [type, setType] = useState("");
+  const [operation, setOperation] = useState("");
+  const [amount, setAmount] = useState("");
+  const [signerDetails,setSignerDetails] = useState(null)
+  const [walletaddress, setWalletAddress] = useState("");
+  const [tokenContract, setTokenContract] = useState(null)
+  const [bankContract, setBankContract] = useState(null)
+  const [TokenAddress, setTokenAddress] = useState("")
+  const [events,setEvents] = useState([])
+
+  useEffect(() => {
+    let updatedAddress = localStorage.getItem('connectedAddress');
+    setWalletAddress(updatedAddress);
+  }, [signerAddress]);
+
+
 
   return (
-    <div className="App flex flex-col h-screen " >
-      <balanceContext.Provider value={{ bal, crypto, type, operation, amount, setBal, setCrypto, setType, setOperation, setAmount }}>
+    <div className="App flex flex-col h-screen">
+      <balanceContext.Provider value={{ bal, crypto, type, operation, amount, walletaddress,tokenContract,bankContract,TokenAddress,signerDetails,events, setBal, setCrypto, setType, setOperation, setAmount, setWalletAddress,setTokenContract,setBankContract,setTokenAddress,setSignerDetails,setEvents }}>
         <Router>
           <Routes>
-            <Route index element={<Homepage address={address} />} />
-            <Route path='/owneraccess' element={<Owneraccess address={Address} />} />
-            <Route path='/balance' element={<Totalbalance address={Address} />} />
-            <Route path='/useraccess' element={<Useraccess address={Address} />} />
-            <Route path='/ether' element={<Ether address={Address} token={false} name="ETHER" />} />
-            <Route path='/token' element={<Token address={Address} token={true} name="TOKEN" />} />
-            <Route path='/transactionlog' element={<Transactionlog address={Address} />} />
-            <Route path='/complete' element={<Complete address='0x435245...' />} />
+            <Route index element={<Homepage address="" />} />
+          </Routes>
+          <ConditionalHeader walletaddress={`${walletaddress}`.slice(0,10)+"...."} />
+          <Routes>
+            <Route path='/owneraccess' element={<Owneraccess />} />
+            <Route path='/balance' element={<Totalbalance />} />
+            <Route path='/useraccess' element={<Useraccess />} />
+            <Route path='/ether' element={<Ether />} />
+            <Route path='/token' element={<Token />} />
+            <Route path='/transactionlog' element={<Transactionlog />} />
+            <Route path='/complete' element={<Complete />} />
           </Routes>
         </Router>
       </balanceContext.Provider>
+      <Footer />
     </div>
   );
 }

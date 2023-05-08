@@ -1,36 +1,50 @@
 
-import React from 'react'
+import React, { useEffect,useContext } from 'react'
 import ether from '../../Images/ether.png'
 import token from '../../Images/token.png'
 import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebar';
-import { ConfirmBox } from './confirmbox'
+import { ConfirmBox } from './Confirmbox'
 import { createContext, useState } from 'react';
-import { signer } from './content';
+// import { signer } from './Homepagecontent';
 import {bankABI} from './ABI/simpleBank'
+import { balanceContext } from '../../App';
 const { ethers } = require('ethers')
+
 export let contract;
-const Content2 = () => {
-   
+const Choosecrypto = () => {
+    const Flatted = require('flatted')
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const navigate2 = useNavigate()
+    const {setBankContract,bankContract,tokenContract,setTokenContract,signerDetails} = useContext(balanceContext)
 
-    function simpleBank(){
+    async function simpleBank(){
+       
         const contractAddress = '0xa70f02187FB17423d190500f16F75b3f0F0EAF5B'
+        // let signer = JSON.parse(localStorage.getItem("connectedAddress"))
+        console.log("SignerDetails",signerDetails)
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        await provider.send('eth_requestAccounts', [])
+        const signer = provider.getSigner()
         contract = new ethers.Contract(contractAddress,bankABI,signer)
-        console.log("contract",contract.bankOwner())
+        
+    
+        
+        const simpleBankContract = Flatted.stringify(contract)
+        // localStorage.setItem('BBankContract',simpleBankContract)
+        setBankContract(contract)
+        
+        console.log("contract",await contract.bankOwner())
+        localStorage.setItem('TokenAddress','')
         navigate2('/ether')
     }
 
-    function tokenBank(){
-        // const contractAddress = '0x37fd054b394Bd0F60E65C389a4640cCA9650a451'
-        // const contract = new ethers.Contract(contractAddress,bankABI,signer)
-        // console.log("contract",contract.bankOwner())
-        navigate2('/token')
+    
+ 
 
-    }
+
     return (
         <div className='flex justify-around mt-9 mb-44'>
             <Sidebar color1='bg-gray' color2='bg-gray' />
@@ -63,4 +77,4 @@ const Content2 = () => {
     )
 }
 
-export default Content2
+export default Choosecrypto

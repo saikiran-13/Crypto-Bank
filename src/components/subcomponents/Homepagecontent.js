@@ -1,21 +1,27 @@
 import sideImage from '../../Images/sideImage.png'
 import '../../App.css'
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
+import { useEffect,useContext } from 'react';
+import { balanceContext } from '../../App';
 const { ethers } = require('ethers')
 
 export let signer,signerAddress;
 export default function Content() {
     const navigate = useNavigate()
-
+    const {setWalletAddress,walletAddress,setSignerDetails} = useContext(balanceContext)
     async function MetamaskConnect(event) {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         await provider.send('eth_requestAccounts', [])
         signer = provider.getSigner()
+        // localStorage.setItem('connectedSigner',JSON.stringify(signer))
+        setSignerDetails(signer)
+   
         signerAddress = await signer.getAddress()
         console.log("Signer",signerAddress)
+        setWalletAddress(signerAddress)
+        localStorage.setItem('connectedAddress',signerAddress)
         if(event.target.name == 'owner'){
-            signerAddress == '0xce4FD76812267BaC745B2B0ab1cC73760F8ACb72'?navigate('/owneraccess'):alert("You are not the owner")
+            signerAddress === '0xce4FD76812267BaC745B2B0ab1cC73760F8ACb72'||signerAddress === '0xe6A9D13D93CbA162A0fB46d338ADD071247910f3'?navigate('/owneraccess'):alert("You are not the owner")
         }
         else{
             navigate('/useraccess')
@@ -28,6 +34,7 @@ export default function Content() {
 
         ethereum.on("accountsChanged", (accounts) => {
             console.log("Accounts",accounts[0])
+
             MetamaskConnect()
         })
 
@@ -35,6 +42,7 @@ export default function Content() {
             console.log("Chain Id", chain)
             MetamaskConnect()
           })
+        
 
     })
 

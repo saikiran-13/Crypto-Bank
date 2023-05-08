@@ -1,7 +1,6 @@
 import React from 'react'
-import { Header } from './subcomponents/header'
-import Footer from './subcomponents/footer'
-import Balancecheck from './subcomponents/Balancecheck'
+
+import Totalbalance from './subcomponents/Totalbalance'
 import { useContext } from 'react'
 import { balanceContext } from '../App'
 
@@ -9,15 +8,13 @@ import { balanceContext } from '../App'
 
 
 
-const Totalbalance = (props) => {
+const Balancecheck = (props) => {
   const {bal,crypto,type} = useContext(balanceContext)
   return (
     <div>
-        <Header address={props.address}/>
-        <Balancecheck name={crypto} value={type} bal={bal}/>
-        <Footer/>
+        <Totalbalance name={crypto} value={type} bal={bal}/>
     </div>
   )
 }
 
-export default Totalbalance
+export default Balancecheck

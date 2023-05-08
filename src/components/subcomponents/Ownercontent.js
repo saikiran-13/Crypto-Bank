@@ -5,18 +5,23 @@ import token from '../../Images/token.png'
 import { useNavigate } from 'react-router-dom'
 import { useContext,useState } from 'react'
 import { balanceContext } from '../../App'
-import { contract } from './choose'
-import { signerAddress } from './content'
+import { contract} from './Choosecrypto'
+import { signer } from './Homepagecontent'
+import { signerAddress } from './Homepagecontent'
+import { bankABI } from './ABI/simpleBank'
+import { bank } from './ABI/TokenBank'
 const {ethers} = require('ethers')
 
 const Ownercontent = () => {
- const {setBal,setCrypto,setType} = useContext(balanceContext)
+ const {setBal,setCrypto,setType,} = useContext(balanceContext)
   const navigate = useNavigate()
 
 
 
   async function Etherbalance(){
-    const balanceInWei = await contract.checkEther();
+    const contractAddress = '0xa70f02187FB17423d190500f16F75b3f0F0EAF5B'
+    const Etherbalance = new ethers.Contract(contractAddress,bankABI,signer)
+    const balanceInWei = await Etherbalance.checkEther()
     const balanceInEther = ethers.utils.formatEther(ethers.utils.parseUnits(balanceInWei.toString(), "wei"));
     console.log("Balance", balanceInEther);
       setBal(balanceInEther)
@@ -26,7 +31,13 @@ const Ownercontent = () => {
   }
 
   async function Tokenbalance(){
-      setBal(200)
+    const BankAddress = '0x114C8CBf548A6C249A06C60412878770DCF887a7'
+    const Etherbalance = new ethers.Contract(BankAddress,bank,signer)
+    const balanceInWei = await Etherbalance.bankBalance()
+    const balanceInTokens = ethers.utils.formatEther(ethers.utils.parseUnits(balanceInWei.toString(), "wei"));
+    console.log("Balance", balanceInTokens);
+
+      setBal(balanceInTokens)
       setCrypto('Token')
       setType('TKN')
       navigate('/balance')

@@ -1,10 +1,7 @@
 import React from 'react'
 import '../../App.css'
-import Balance from '../../Images/checkBalance.png'
-import deposit from '../../Images/deposit.png'
-import withdraw from '../../Images/withdraw.svg'
 import { Button } from '@mui/material'
-import { ConfirmBox } from './confirmbox'
+import { ConfirmBox } from './Confirmbox'
 import { useState } from 'react'
 
 const Buttoncrypto = (props) => {
@@ -36,7 +33,6 @@ const Buttoncrypto = (props) => {
       <ConfirmBox value={open} handleClose={handleClose} text={props.text} name={props.name}/>
 
 
-      {/* 'bg-primary rounded-full px-10 py-3 w-max outline-none shadow-md font-bold text-white text-2xl shadow-white' */}
     </div>
   )
 }

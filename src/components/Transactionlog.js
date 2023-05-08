@@ -1,14 +1,12 @@
 import React from 'react'
-import { Header } from './subcomponents/header'
-import Footer from './subcomponents/footer'
+
 import Transactiondetails from './subcomponents/Transactiondetails'
 
 const Transactionlog = (props) => {
   return (
     <div>
-        <Header address={props.address}/>
+        <h1 className=" bg-white w-max p-5 px-10 text-2xl text-black shadow-blue shadow-lg font-bold header m-auto rounded-lg">TRANSACTION<span className='ml-3'> </span>HISTORY</h1>
         <Transactiondetails/>
-        <Footer/>
     </div>
   )
 }
