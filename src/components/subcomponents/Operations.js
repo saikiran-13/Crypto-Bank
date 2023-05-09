@@ -21,6 +21,7 @@ const Operations = (props) => {
 
 
   async function checkBalance() {
+    console.log("Bank contract",await bankContract)
     const contractAddress = '0xa70f02187FB17423d190500f16F75b3f0F0EAF5B'
     const BankAddress = '0x114C8CBf548A6C249A06C60412878770DCF887a7'
 

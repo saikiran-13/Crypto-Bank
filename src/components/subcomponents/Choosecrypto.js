@@ -32,9 +32,9 @@ const Choosecrypto = () => {
         
     
         
-        const simpleBankContract = Flatted.stringify(contract)
+        // const simpleBankContract = Flatted.stringify(contract)
         // localStorage.setItem('BBankContract',simpleBankContract)
-        setBankContract(contract)
+        await setBankContract(contract)
         
         console.log("contract",await contract.bankOwner())
         localStorage.setItem('TokenAddress','')

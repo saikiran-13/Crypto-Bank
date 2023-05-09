@@ -8,9 +8,25 @@ const { ethers } = require('ethers')
 export let signer,signerAddress;
 export default function Content() {
     const navigate = useNavigate()
+    const {ethereum} = window
     const {setWalletAddress,walletAddress,setSignerDetails} = useContext(balanceContext)
     async function MetamaskConnect(event) {
+
+  
+        async function switchChain(){
+            await ethereum.request({method:'wallet_switchEthereumChain',params:[{
+              chainId:"0xaa36a7"
+            }]})
+          }
+
+    
         const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const network = provider.getNetwork()
+        const chainId = (await network).chainId
+
+      if(chainId!="0xaa36a7" || chainId!="0x13881"){
+        await switchChain()
+      }
         await provider.send('eth_requestAccounts', [])
         signer = provider.getSigner()
         // localStorage.setItem('connectedSigner',JSON.stringify(signer))

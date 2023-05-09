@@ -16,7 +16,7 @@ export default function Footer() {
                 <li className='border-b-4 border-b-black'>Announcements</li>
             </ul>
             <div classname="community flex gap-20">
-                <div className='flex pt-10 header text-xl justify-start ml-32 mt-8'><h1 className='bg-blacky max-w-fit p-3 mr-5 rounded-lg text-white'>Join our community
+                <div className='flex pt-10 header text-xl justify-start ml-32 mt-8'><h1 className='bg-blacky max-w-fit p-3 mr-5 rounded-lg opacity-90 text-white'>Join our community
                 </h1>
                     <ul className="flex place-content-around  gap-10 max-w-fit">
                         <li className='mt-3 w-7 h-7'><img src={facebook} alt="facebook image"></img></li>
