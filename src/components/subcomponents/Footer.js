@@ -24,7 +24,7 @@ export default function Footer() {
                         <li className='mt-3 w-7 h-7'><img src={twitter} alt="twitter image"></img></li>
                         <li className='mt-1 w-11 h-10'><img src={discord} alt="discord image"></img></li>
                     </ul>
-                    <div className="header flex justify-end items-center ml-96 opacity-90">
+                    <div className="header flex justify-end items-center ml-96 opacity-80">
                         <h1 className="bank text-2xl text-slate-200 ml-80 mr-5">
                             <span className='crypto text-violet-600 bg-white p-2 rounded-lg '>Crypto</span> Bank
                         </h1>
