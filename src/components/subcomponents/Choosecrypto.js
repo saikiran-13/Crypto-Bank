@@ -1,11 +1,11 @@
 
-import React, { useEffect,useContext } from 'react'
+import React, { useContext } from 'react'
 import ether from '../../Images/ether.png'
 import token from '../../Images/token.png'
 import { useNavigate } from "react-router-dom";
 import Sidebar from './Sidebar';
 import { ConfirmBox } from './Confirmbox'
-import { createContext, useState } from 'react';
+import {  useState } from 'react';
 // import { signer } from './Homepagecontent';
 import {bankABI} from './ABI/simpleBank'
 import { balanceContext } from '../../App';
@@ -23,7 +23,6 @@ const Choosecrypto = () => {
     async function simpleBank(){
        
         const contractAddress = '0xa70f02187FB17423d190500f16F75b3f0F0EAF5B'
-        // let signer = JSON.parse(localStorage.getItem("connectedAddress"))
         console.log("SignerDetails",signerDetails)
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         await provider.send('eth_requestAccounts', [])
@@ -32,6 +31,8 @@ const Choosecrypto = () => {
         
     
         
+        const simpleBankContract = Flatted.stringify(contract)
+        setBankContract(contract)
         // const simpleBankContract = Flatted.stringify(contract)
         // localStorage.setItem('BBankContract',simpleBankContract)
         await setBankContract(contract)
