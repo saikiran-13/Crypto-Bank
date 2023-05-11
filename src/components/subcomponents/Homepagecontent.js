@@ -9,8 +9,8 @@ export let signer,signerAddress;
 export default function Content() {
     const navigate = useNavigate()
     const {ethereum} = window
-    const {setWalletAddress,walletAddress,setSignerDetails} = useContext(balanceContext)
-    async function MetamaskConnect(name) {
+    const {setWalletAddress} = useContext(balanceContext)
+    async function MetamaskConnect(event) {
 
   
         async function switchChain(){
@@ -25,21 +25,21 @@ export default function Content() {
         const chainId = (await network).chainId
         console.log(chainId)
 
-      if(chainId!="11155111" &&  chainId!="80001"){
+      if(chainId!=="11155111" &&  chainId!=="80001"){
         console.log("chain",chainId)
         await switchChain()
       }
         await provider.send('eth_requestAccounts', [])
         signer = provider.getSigner()
         // localStorage.setItem('connectedSigner',JSON.stringify(signer))
-        setSignerDetails(signer)
+        // setSignerDetails(signer)
    
         signerAddress = await signer.getAddress()
         console.log("Signer",signerAddress)
         setWalletAddress(signerAddress)
         localStorage.setItem('connectedAddress',signerAddress)
         // console.log("EVEnt",event.target.name)
-        if(name == 'owner'){
+        if(event.target.name == 'owner'){
             signerAddress === '0xf0Ec2243D358FE86CF0Ec5A4C5B5E0571914CeC6'?navigate('/owneraccess'):alert("You are not the owner")
         }
         else{
@@ -80,8 +80,8 @@ export default function Content() {
                 </div>
 
                 <div className='btn flex text-white'>
-                    <button name='owner' className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-black text-3xl font-semibold mr-20 hover:bg-least" onClick={(event) => { MetamaskConnect(event.target.name) }}>Owner Access</button>
-                    <button name='user' className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-black text-3xl font-semibold hover:bg-least" onClick={(event) => { MetamaskConnect(event.target.name) }}>User Access</button>
+                    <button name='owner' className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-black text-3xl font-semibold mr-20 hover:bg-least" onClick={(event) => { MetamaskConnect(event) }}>Owner Access</button>
+                    <button name='user' className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-black text-3xl font-semibold hover:bg-least" onClick={(event) => { MetamaskConnect(event) }}>User Access</button>
                 </div>
             </div>
 
