@@ -10,7 +10,7 @@ export default function Content() {
     const navigate = useNavigate()
     const {ethereum} = window
     const {setWalletAddress,walletAddress,setSignerDetails} = useContext(balanceContext)
-    async function MetamaskConnect(event) {
+    async function MetamaskConnect(name) {
 
   
         async function switchChain(){
@@ -23,8 +23,10 @@ export default function Content() {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         const network = provider.getNetwork()
         const chainId = (await network).chainId
+        console.log(chainId)
 
-      if(chainId!="0xaa36a7" || chainId!="0x13881"){
+      if(chainId!="11155111" &&  chainId!="80001"){
+        console.log("chain",chainId)
         await switchChain()
       }
         await provider.send('eth_requestAccounts', [])
@@ -36,8 +38,9 @@ export default function Content() {
         console.log("Signer",signerAddress)
         setWalletAddress(signerAddress)
         localStorage.setItem('connectedAddress',signerAddress)
-        if(event.target.name == 'owner'){
-            signerAddress === '0xce4FD76812267BaC745B2B0ab1cC73760F8ACb72'||signerAddress === '0xe6A9D13D93CbA162A0fB46d338ADD071247910f3'?navigate('/owneraccess'):alert("You are not the owner")
+        // console.log("EVEnt",event.target.name)
+        if(name == 'owner'){
+            signerAddress === '0xf0Ec2243D358FE86CF0Ec5A4C5B5E0571914CeC6'?navigate('/owneraccess'):alert("You are not the owner")
         }
         else{
             navigate('/useraccess')
@@ -66,7 +69,7 @@ export default function Content() {
         <div className='content flex justify-around place-content-around mb-10'>
 
             <div className='flex w-3/5 flex-col m-16'>
-                <div className='flex flex-col text-white text-8xl  w-full justify-center gap-5' >
+                <div className='flex flex-col text-slate-700 text-8xl  w-full justify-center gap-5' >
                     <h1 >The <span className='text-blue'>First Secure </span>Crypto</h1>
                     <h1 >Platform In The</h1>
                     <h1 >World</h1>
@@ -77,8 +80,8 @@ export default function Content() {
                 </div>
 
                 <div className='btn flex text-white'>
-                    <button name='owner' className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-white text-3xl font-semibold mr-20 hover:bg-least" onClick={(event) => { MetamaskConnect(event) }}>Owner Access</button>
-                    <button name='user' className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-white text-3xl font-semibold hover:bg-least" onClick={(event) => { MetamaskConnect(event) }}>User Access</button>
+                    <button name='owner' className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-black text-3xl font-semibold mr-20 hover:bg-least" onClick={(event) => { MetamaskConnect(event.target.name) }}>Owner Access</button>
+                    <button name='user' className="bg-primary rounded-full p-5 w-64 outline-none shadow-md shadow-black text-3xl font-semibold hover:bg-least" onClick={(event) => { MetamaskConnect(event.target.name) }}>User Access</button>
                 </div>
             </div>
 

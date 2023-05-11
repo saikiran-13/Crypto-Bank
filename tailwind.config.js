@@ -5,14 +5,16 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     colors: {
-      primary: '#86c232',
+      primary: '#4072d9',
       white:'#f3f5f9',
       blue:'#4072d9',
       gray:'#6b6e70',
-      least:'#61893f',
+      least:'#2e58ad',
       dark:'#474b4f',
       black:'#222629',
       light:'#ececeb',
+      green:'#86c232',
+      gold:'#ffcf40',
 
     },
     fontFamily:{
@@ -20,7 +22,8 @@ module.exports = {
     },
     extend: {
       backgroundColor:{
-         blacky: '#222629',
+        //  blacky: '#222629',
+        blacky:'rgb(241,245,249)'
       }
       
     },

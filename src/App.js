@@ -45,7 +45,7 @@ function App() {
 
 
   return (
-    <div className="App flex flex-col h-screen">
+    <div className="App flex flex-col h-screen justify-between">
       <balanceContext.Provider value={{ bal, crypto, type, operation, amount, walletaddress,tokenContract,bankContract,TokenAddress,signerDetails,events, setBal, setCrypto, setType, setOperation, setAmount, setWalletAddress,setTokenContract,setBankContract,setTokenAddress,setSignerDetails,setEvents }}>
         <Router>
           <Routes>

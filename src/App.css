@@ -26,3 +26,25 @@ input::placeholder {
   color: white;
   opacity: 0.8;
 }
+
+.image-container {
+  display: inline-block; /* or any other appropriate display value */
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.image-container:hover {
+  transform: scale(1.2);
+}
+
+
+.deposit-container {
+  display: inline-block; /* or any other appropriate display value */
+  transition: transform 0.3s;
+}
+
+.deposit-container:hover {
+  transform: translateY(-10px);
+}
+
+
