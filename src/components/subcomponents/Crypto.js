@@ -1,16 +1,12 @@
 import React from 'react'
-import { Header } from './Header'
-import { useState } from 'react'
-import Balance from '../../Images/checkBalance.png'
-import deposit from '../../Images/deposit.png'
-import withdraw from '../../Images/withdraw.svg'
+
 import Sidebar from './Sidebar'
 import Operations from './Operations'
 
 const Crypto = (props) => {
   console.log("name",props.name)
   return (
-    <div>
+    <div>                                       
       <div className='flex justify-around'>
       
       <Sidebar color1='bg-blue' color2='bg-gray'/>

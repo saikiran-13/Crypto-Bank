@@ -1,58 +1,75 @@
 import sideImage from '../../Images/sideImage.png'
 import '../../App.css'
 import { useNavigate } from "react-router-dom";
-import { useEffect,useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { balanceContext } from '../../App';
 const { ethers } = require('ethers')
 
-export let signer,signerAddress;
+export let signer, signerAddress
+export let Network;
 export default function Content() {
+
     const navigate = useNavigate()
-    const {ethereum} = window
-    const {setWalletAddress} = useContext(balanceContext)
+    const { ethereum } = window
+    const { setWalletAddress,setNetwork } = useContext(balanceContext)
     async function MetamaskConnect(event) {
+      
 
-  
-        async function switchChain(){
-            await ethereum.request({method:'wallet_switchEthereumChain',params:[{
-              chainId:"0xaa36a7"
-            }]})
-          }
+        async function switchChain() {
+            await ethereum.request({
+                method: 'wallet_switchEthereumChain', params: [{
+                    chainId: "0xaa36a7"
+                }]
+            })
+        }
 
-    
+
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         const network = provider.getNetwork()
         const chainId = (await network).chainId
-        console.log(chainId)
+        console.log("chainId", chainId)
+        if (chainId == "11155111") { Network= "Sepolia" }
+        else if (chainId == "80001") { Network = "Mumbai" }
+        else { Network = "Network" }
+        setNetwork(Network)
+        localStorage.setItem("Network",Network)
+   
 
-      if(chainId!=="11155111" &&  chainId!=="80001"){
-        console.log("chain",chainId)
-        await switchChain()
-      }
+        localStorage.setItem("Network", Network)
+
+        if (chainId != "11155111" && chainId != "80001") {
+            console.log("chain", chainId)
+            await switchChain()
+        }
+            console.log("asdhfjsdlkf",chainId)
+           
+
+
+
         await provider.send('eth_requestAccounts', [])
         signer = provider.getSigner()
         // localStorage.setItem('connectedSigner',JSON.stringify(signer))
         // setSignerDetails(signer)
-   
+
         signerAddress = await signer.getAddress()
-        console.log("Signer",signerAddress)
+        console.log("Signer", signerAddress)
         setWalletAddress(signerAddress)
-        localStorage.setItem('connectedAddress',signerAddress)
+        localStorage.setItem('connectedAddress', signerAddress)
         // console.log("EVEnt",event.target.name)
-        if(event.target.name == 'owner'){
-            signerAddress === '0xf0Ec2243D358FE86CF0Ec5A4C5B5E0571914CeC6'?navigate('/owneraccess'):alert("You are not the owner")
+        if (event.target.name == 'owner') {
+            signerAddress === '0xf0Ec2243D358FE86CF0Ec5A4C5B5E0571914CeC6' ? navigate('/owneraccess') : alert("You are not the owner")
         }
-        else{
+        else {
             navigate('/useraccess')
         }
-        
+
     }
 
     useEffect(() => {
-        const {ethereum} = window
+        const { ethereum } = window
 
         ethereum.on("accountsChanged", (accounts) => {
-            console.log("Accounts",accounts[0])
+            console.log("Accounts", accounts[0])
 
             MetamaskConnect()
         })
@@ -60,8 +77,11 @@ export default function Content() {
         ethereum.on("chainChanged", (chain) => {
             console.log("Chain Id", chain)
             MetamaskConnect()
-          })
-        
+            // setNetwork(Network)
+            // navigate('/useraccess')
+            // window.location.reload()
+        })
+
 
     })
 
@@ -87,7 +107,7 @@ export default function Content() {
 
             <div className='sideImage flex flex-end w-2/5 p-6 rounded-full shadow-primary mb-10'>
                 <div className='border-b-white rounded-full'>
-                    <img class="object-fill w-full h-full " src={sideImage} alt="img not found" ></img>
+                    <img class="image object-fill w-full h-full " src={sideImage} alt="img not found" ></img>
                 </div>
             </div>
 

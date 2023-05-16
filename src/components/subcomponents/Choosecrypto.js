@@ -50,7 +50,7 @@ const Choosecrypto = () => {
                     
                     <div className='flex flex-col place-content-center justify-center mt-6'>
                         <div className="image-container">
-                        <img src={ether} alt="ether not found" width={350} height={200}></img>
+                        <img className="images" src={ether} alt="ether not found" width={350} height={200}></img>
                         </div>
                  
                         <button onClick={ simpleBank } className='bg-primary rounded-full p-5 w-64 m-auto mt-10 outline-none shadow-md font-bold shadow-black text-white text-center text-2xl hover:bg-least'>ETHER</button>
@@ -58,13 +58,13 @@ const Choosecrypto = () => {
 
                     <div className="flex flex-col place-content-center justify-center mt-5">
                         <div className='image-container m-auto'>
-                        <img src={token} alt="token not found" width={220} height={150}></img>
+                        <img className="images" src={token} alt="token not found" width={220} height={150}></img>
                         </div>
                    
                         <button onClick={() => {
                             handleOpen()
                         }} className='bg-primary rounded-full p-5 w-64 m-auto mt-6 outline-none shadow-md font-bold text-white text-center shadow-black text-2xl hover:bg-least'>TOKEN</button>
-                         <ConfirmBox value={open} handleClose={handleClose} name="TOKEN" text='choose'/>
+                         <ConfirmBox value={open} handleClose={handleClose} name="TOKEN" text='CHOOSE'/>
                     </div>
                 </div>
             </div>

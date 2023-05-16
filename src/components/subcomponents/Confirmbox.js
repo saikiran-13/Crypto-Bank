@@ -5,14 +5,14 @@ import { Cancel, Check } from '@mui/icons-material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { balanceContext } from '../../App';
-import { bankABI } from './ABI/simpleBank';
+
 import { bank } from './ABI/TokenBank';
 import { token } from './ABI/Tokencontract'
 import { Bankcontract, Ethercontract } from './ContractInstances';
 import Loader, { TailSpin, ThreeCircles,Bars } from 'react-loader-spinner';
-import { flexbox } from '@mui/system';
 
-// import { contract } from './Choosecrypto';
+
+// import { contract } from './CHOOSEcrypto';
 const { ethers } = require('ethers')
 const theme = createTheme({
   palette: {
@@ -74,7 +74,7 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
      
           handleClose()
         
-          alert("Amount should be a number");
+          alert("Check the entered Amount");
          
         } 
   
@@ -265,7 +265,7 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
      
           handleClose()
         
-          alert("Amount should be a number");
+          alert("Check the entered Amount");
          
         } 
   
@@ -425,8 +425,8 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
               <Typography variant="h6" component="h2" sx={{ color: '#4072d9', marginBottom: '20px', fontWeight: 'bold' }}>
                 {text} {name}
               </Typography>
-              {name == "TOKEN" && text === 'choose' && <TextField label="Token Address" variant="outlined" onChange={(event) => { setTokenAddress(event.target.value) }} fullWidth margin="normal" />}
-              {text != "CHECK" && text !== 'choose' && <TextField label="Amount" onChange={(event) => { setAmount(event.target.value) }} variant="outlined" fullWidth margin="normal" />}
+              {name == "TOKEN" && text === 'CHOOSE' && <TextField label="Token Address" variant="outlined" onChange={(event) => { setTokenAddress(event.target.value) }} fullWidth margin="normal" />}
+              {text != "CHECK" && text !== 'CHOOSE' && <TextField label="Amount" onChange={(event) => { setAmount(event.target.value) }} variant="outlined" fullWidth margin="normal" />}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: 550, height: 100, mt: 2 }}>
                 <Button
                   variant="outlined"
