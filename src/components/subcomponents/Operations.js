@@ -34,7 +34,7 @@ const Operations = (props) => {
 
     if (tokenAddress) {
       contract = BankContract
-      Amount = await contract.customerBalance(signerAddress)
+      Amount = await contract.userTokenBalance(signerAddress,tokenadd)
     }
     else {
       contract = EtherContract
