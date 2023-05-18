@@ -1,4 +1,4 @@
-import { Bankcontract, Ethercontract } from './ContractInstances'
+import {  Ethercontract } from './ContractInstances'
 import React from 'react'
 import owner from '../../Images/owner.png'
 import ether from '../../Images/ether.png'
@@ -6,13 +6,8 @@ import token from '../../Images/token.png'
 import { useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import { balanceContext } from '../../App'
-import { contract } from './Choosecrypto'
-import { signer } from './Homepagecontent'
-import { signerAddress } from './Homepagecontent'
-import Flatted from 'flatted'
-import { bankABI } from './ABI/simpleBank'
-import { bank } from './ABI/TokenBank'
-import CircularJSON from 'circular-json'
+import DropdownMenu from './dropdown'
+
 const { ethers } = require('ethers')
 
 
@@ -22,11 +17,13 @@ const Ownercontent = () => {
 
 
 
+
+
+
   async function Etherbalance() {
-    const {EtherContract} = await Ethercontract()
+    const { EtherContract } = await Ethercontract()
     const balanceInWei = await EtherContract.checkEther()
     const balanceInEther = ethers.utils.formatEther(ethers.utils.parseUnits(balanceInWei.toString(), "wei"));
-    // localStorage.setItem
     console.log("Balance", balanceInEther);
     setBal(balanceInEther)
     setCrypto('Ether')
@@ -34,18 +31,7 @@ const Ownercontent = () => {
     navigate('/balance')
   }
 
-  async function Tokenbalance() {
 
-    const {BankContract} = await Bankcontract()
-    const balanceInWei = await BankContract.bankBalance()
-    const balanceInTokens = ethers.utils.formatEther(ethers.utils.parseUnits(balanceInWei.toString(), "wei"));
-    console.log("Balance", balanceInTokens);
-
-    setBal(balanceInTokens)
-    setCrypto('Token')
-    setType('TKN')
-    navigate('/balance')
-  }
 
   return (
 
@@ -67,9 +53,14 @@ const Ownercontent = () => {
 
           <div className="flex flex-col place-content-center justify-center">
             <img className="m-auto mb-10" src={token} alt="token not found" width={180} height={200}></img>
-            <button className='bg-primary rounded-full p-5 px-16 w-max m-auto outline-none shadow-md font-bold text-white text-center shadow-black text-2xl hover:bg-least' onClick={Tokenbalance}>TOKEN BALANCE</button>
+            <div>
+            <DropdownMenu access={true} balance={true} />
           </div>
+
+          </div>
+          
         </div>
+
       </div>
     </div>
 

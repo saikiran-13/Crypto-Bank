@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { Modal, Box, Typography, Button, TextField, IconButton } from '@mui/material';
 import { Cancel, Check } from '@mui/icons-material';
@@ -6,13 +6,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { balanceContext } from '../../App';
 
-import { bank } from './ABI/TokenBank';
 import { token } from './ABI/Tokencontract'
 import { Bankcontract, Ethercontract } from './ContractInstances';
-import Loader, { TailSpin, ThreeCircles,Bars } from 'react-loader-spinner';
+import { TailSpin} from 'react-loader-spinner';
 
 
-// import { contract } from './CHOOSEcrypto';
 const { ethers } = require('ethers')
 const theme = createTheme({
   palette: {
@@ -25,21 +23,21 @@ const theme = createTheme({
   },
 });
 
-export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
+export const ConfirmBox = ({ value, handleClose, text, name}) => {
   let contract;
   let array = {}
-  const { setOperation, setType, setAmount, amount, setTokenAddress, TokenAddress } = useContext(balanceContext)
+  const { setOperation, setType, setAmount, amount, setTokenAddress} = useContext(balanceContext)
   const navigate = useNavigate()
+
   const [loading, setLoading] = useState(false)
   const [showContent, setShowContent] = useState(true)
-  const [confirmClicked, setConfirmClicked] = useState(false); // Track if confirm button is clicked
   const [boxStyle, setBoxStyle] = useState({
     transform: 'rotateY(0deg)',
     transition: 'transform 0.3s ease-in-out',
   });
   const [boxVisible,setBoxVisible] = useState(true)
 
-  const BankAddress = '0x86546cD3a0e9Da1Fcc3Be2605d8C7b9ae3aE3143'
+  const BankAddress = '0x099C75ED7a12b5AACBaF1eb03e5E824176A9C8ac'
 
   async function deposit() {
  
@@ -47,7 +45,6 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
     const { signer, EtherContract } = await Ethercontract()
     const { BankContract,chainId } = await Bankcontract()
     array = JSON.parse(localStorage.getItem(`${chainId}`))
-    console.log("first",array)
 
     if (name === 'ETHER') {
       try {
@@ -57,16 +54,13 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
         await deposit.wait()
         console.log("deposited", amount)
         setLoading(false)
-        setConfirmClicked(false)
         setBoxVisible(true)
-       
         navigate('/complete');
       }
       catch (error) {
         const errormsg = error.toString();
         console.log(errormsg);
         if (!errormsg.includes('user rejected transaction ')) {
-    
           setBoxStyle({
             transform: 'rotateY(0deg)',
             transition: 'transform 0.5s ease-in-out',
@@ -87,14 +81,15 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
           setShowContent(true);
         }
       }
+
       finally {
         setLoading(false);
-        setConfirmClicked(false);
         setBoxVisible(true);
         setShowContent(true)
       }
 
     }
+
     else {
 
       try {
@@ -104,13 +99,9 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
         const connectedAddress = localStorage.getItem('connectedAddress')
         const TokenContract = new ethers.Contract(TokenAddress, token, signer);
         const amountInWei = ethers.utils.parseEther(amount);
-       
 
-
-        // Check current allowance
         const currentAllowance = await TokenContract.allowance(connectedAddress, BankAddress);
 
-        // If current allowance is less than the desired amount, update the allowance
         if (currentAllowance.lt(amountInWei)) {
           const tx = await TokenContract.approve(BankAddress, amountInWei);
           await tx.wait();
@@ -120,12 +111,10 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
         // Deposit tokens
         const depositTx = await contract.depositTokens(amountInWei);
         await depositTx.wait();
-        console.log("Deposited Tokens", amount);
         setLoading(false)
-        setConfirmClicked(false)
+
         setBoxVisible(true)
         const tokenAdd = localStorage.getItem('TokenAddress')
-        console.log("TokenAddress",tokenAdd)
         if(!array){
           const emptyArray = {};
           emptyArray[tokenAdd] = 0;
@@ -172,7 +161,7 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
       }
       finally {
         setLoading(false);
-        setConfirmClicked(false);
+
         setBoxVisible(true);
         setShowContent(true)
       }
@@ -195,7 +184,7 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
         await withdraw.wait()
         console.log("Withdraw", amount)
         setLoading(false)
-        setConfirmClicked(false)
+
         setBoxVisible(true)
       
         navigate('/complete');
@@ -227,7 +216,7 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
       }
       finally {
         setLoading(false);
-        setConfirmClicked(false);
+
         setBoxVisible(true);
         setShowContent(true)
       }
@@ -242,7 +231,7 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
         await withdraw.wait()
         console.log("Withdrawn Tokens", amount)
         setLoading(false)
-        setConfirmClicked(false)
+        
         setBoxVisible(true)
         const tokenAdd = localStorage.getItem('TokenAddress')
         console.log('withdraw tokens',array,array[tokenAdd])
@@ -280,7 +269,7 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
       }
       finally {
         setLoading(false);
-        setConfirmClicked(false);
+    
         setBoxVisible(true);
         setShowContent(true)
       }
@@ -289,59 +278,7 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
 
   }
 
-  async function tokenBank() {
 
-    try {
-      setLoading(true)
-      const BankAddress = '0x86546cD3a0e9Da1Fcc3Be2605d8C7b9ae3aE3143'
-      // console.log("SignerDetails",signerDetails)
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      await provider.send('eth_requestAccounts', [])
-      const signer = provider.getSigner()
-      contract = new ethers.Contract(BankAddress, bank, signer)
-      let tokendetails = await contract.tokenDetails(TokenAddress)
-      await tokendetails.wait()
-      console.log(await contract.token())
-      localStorage.setItem("TokenAddress", TokenAddress)
-      setLoading(false)
-      setConfirmClicked(false)
-      setBoxVisible(true)
-      navigate('/token');
-    }
-    catch (error) {
-      const errormsg = error.toString();
-      console.log(errormsg);
-      if (!errormsg.includes('user rejected transaction ')) {
-  
-        setBoxStyle({
-          transform: 'rotateY(0deg)',
-          transition: 'transform 0.5s ease-in-out',
-        });
-   
-        handleClose()
-      
-        alert("Enter Valid Token Address");
-       
-      } 
-
-      else {
-        setBoxVisible(false);
-        setBoxStyle({
-          transform: 'rotateY(0deg)',
-          transition: 'transform 0.3s ease-in-out',
-        });
-        setShowContent(true);
-      }
-    }
-    finally {
-      setLoading(false);
-      setConfirmClicked(false);
-      setBoxVisible(true);
-      setShowContent(true)
-    }
-
-
-  }
 
   function handleConfirm() {
     try{
@@ -350,12 +287,9 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
       } else if (text === 'WITHDRAW') {
         withdraw();
       }
-      else {
-        tokenBank()
-      }
+   
       setType(name);
       setOperation(text);
-      setConfirmClicked(true);
       setBoxVisible(true)
       setShowContent(false)
       setBoxStyle({
@@ -372,13 +306,13 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
     }
    
   }
-  console.log("hi",boxVisible)
+
   const containerStyle = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    color: 'blue' // Change the color value to blue
+    color: 'blue' 
   };
   
 
@@ -410,7 +344,7 @@ export const ConfirmBox = ({ value, handleClose, text, name, val }) => {
               ...boxStyle,
             }}
           >
-            {loading && ( // Show spinner only when isLoading is true
+            {loading && ( 
             
             // Render the loader component
             <div style={containerStyle}>

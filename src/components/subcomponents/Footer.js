@@ -14,7 +14,7 @@ export default function Footer() {
                 <li className='border-b-4 border-b-black my-auto'>Payments</li>
                 <li className='border-b-4 border-b-black my-auto'>Connect</li>
                 <li className='border-b-4 border-b-black my-auto'>FAQs</li>
-                {/* <li className='border-b-4 border-b-black'>Announcements</li> */}
+            
             </ul>
             <div classname="flex flex-col ">
                 <div className='flex flex-col pt-10 header text-xl justify-start ml-32 '>

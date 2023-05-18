@@ -27,7 +27,7 @@ export default function Content() {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         const network = provider.getNetwork()
         const chainId = (await network).chainId
-        console.log("chainId", chainId)
+
         if (chainId == "11155111") { Network= "Sepolia" }
         else if (chainId == "80001") { Network = "Mumbai" }
         else { Network = "Network" }
@@ -41,23 +41,21 @@ export default function Content() {
             console.log("chain", chainId)
             await switchChain()
         }
-            console.log("asdhfjsdlkf",chainId)
+        
            
 
 
 
         await provider.send('eth_requestAccounts', [])
         signer = provider.getSigner()
-        // localStorage.setItem('connectedSigner',JSON.stringify(signer))
-        // setSignerDetails(signer)
+
 
         signerAddress = await signer.getAddress()
-        console.log("Signer", signerAddress)
+       
         setWalletAddress(signerAddress)
         localStorage.setItem('connectedAddress', signerAddress)
-        // console.log("EVEnt",event.target.name)
         if (event.target.name == 'owner') {
-            signerAddress === '0xf0Ec2243D358FE86CF0Ec5A4C5B5E0571914CeC6' ? navigate('/owneraccess') : alert("You are not the owner")
+            signerAddress === '0x967B1dC7FFC8E5D02D3aE0455863BE76B1cD412F' ? navigate('/owneraccess') : alert("You are not the owner")
         }
         else {
             navigate('/useraccess')
@@ -77,9 +75,7 @@ export default function Content() {
         ethereum.on("chainChanged", (chain) => {
             console.log("Chain Id", chain)
             MetamaskConnect()
-            // setNetwork(Network)
-            // navigate('/useraccess')
-            // window.location.reload()
+ 
         })
 
 

@@ -95,25 +95,6 @@ const bank = [
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "customerBalance",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "uint256",
 				"name": "_amount",
 				"type": "uint256"
@@ -125,7 +106,13 @@ const bank = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_tokenaddress",
+				"type": "address"
+			}
+		],
 		"name": "personBalance",
 		"outputs": [
 			{
@@ -161,6 +148,30 @@ const bank = [
 		"name": "tokenDetails",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "userTokenBalance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{

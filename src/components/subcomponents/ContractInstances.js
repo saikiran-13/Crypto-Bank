@@ -4,9 +4,9 @@ const { ethers } = require('ethers')
 export async function Ethercontract() {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     await provider.send('eth_requestAccounts', [])
-    const signer = provider.getSigner()
-    const signerAddress = signer.getAddress()
-    const contractAddress = '0x0053Fd464849C7b3718f90BA6ca27E4a8387b122'
+    const signer =  provider.getSigner()
+    const signerAddress = await signer.getAddress()
+    const contractAddress = '0x4c42db57C5aed07d7dA496865C69B56Fd5186d30'
     const EtherContract = new ethers.Contract(contractAddress, bankABI, signer)
     return {signerAddress,signer,EtherContract}
 
@@ -19,10 +19,10 @@ export async function Bankcontract() {
     const signer = provider.getSigner()
     const network = await provider.getNetwork()
     const chainId = network.chainId
-    const signerAddress = signer.getAddress()
+    const signerAddress = await signer.getAddress()
     console.log("signer",signer)
-    const BankAddress = '0x86546cD3a0e9Da1Fcc3Be2605d8C7b9ae3aE3143'
+    const BankAddress = '0x099C75ED7a12b5AACBaF1eb03e5E824176A9C8ac'
     const BankContract = new ethers.Contract(BankAddress, bank, signer)
-    return {chainId,signerAddress,BankContract}
+    return {chainId,signerAddress,signer,BankContract}
 
   }

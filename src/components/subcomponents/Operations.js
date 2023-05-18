@@ -14,6 +14,7 @@ import { signer, signerAddress } from './Homepagecontent'
 import '../../App'
 import { useContext, useState, useEffect } from 'react'
 import { Ethercontract, Bankcontract } from './ContractInstances'
+import DropdownMenu from './dropdown'
 const { ethers } = require('ethers')
 
 const Operations = (props) => {
@@ -24,6 +25,9 @@ const Operations = (props) => {
 
 
   async function checkBalance() {
+    <div>
+      <DropdownMenu balance={true}/>
+    </div>
     const { signer, EtherContract } = await Ethercontract()
     const { BankContract } = await Bankcontract()
     const signerAddress = await signer.getAddress()
@@ -34,6 +38,7 @@ const Operations = (props) => {
 
     if (tokenAddress) {
       contract = BankContract
+      const tokenadd = localStorage.getItem("TokenBalance")
       Amount = await contract.userTokenBalance(signerAddress,tokenadd)
     }
     else {
@@ -118,8 +123,8 @@ const Operations = (props) => {
     
     else {
       const provider = new ethers.providers.JsonRpcProvider(" https://polygon-mumbai.infura.io/v3/4458cf4d1689497b9a38b1d6bbf05e78")
-      const contractAddress = '0xa70f02187FB17423d190500f16F75b3f0F0EAF5B'
-      const BankAddress = '0x86546cD3a0e9Da1Fcc3Be2605d8C7b9ae3aE3143'
+      const contractAddress = '0x4c42db57C5aed07d7dA496865C69B56Fd5186d30'
+      const BankAddress = '0x099C75ED7a12b5AACBaF1eb03e5E824176A9C8ac'
       let Mcontract;
       if(TokenAddress){
          Mcontract = new ethers.Contract(BankAddress, bank, provider)
@@ -137,11 +142,6 @@ const Operations = (props) => {
       storeEventsdata(withdrawnevents, eventsArray, signerAddress,false)
 
     }
-
-
-
-
-
 
 
     console.log(eventsArray)
@@ -164,9 +164,14 @@ const Operations = (props) => {
           {/* {props.name == 'TOKEN' && <Buttoncrypto image={Balance} text="CHECK" name={props.name} />} */}
           {<div className='flex flex-col justify-center place-content-center mb-14 mt-10 pt-10 mr-10'>
             <div className='image-container'><img className='m-auto mt-10 ' src={Balance} alt="image not found" width={150} height={100} /></div>
-            <button className='bg-primary rounded-full mt-3 mb-4 h-16 px-8 w-max outline-none shadow-md font-bold text-white text-2xl shadow-black hover:bg-least' onClick={checkBalance}>CHECK BALANCE</button></div>}
+            {props.name === 'ETHER' && <button className='bg-primary rounded-full mt-3 mb-4 h-16 px-8 w-max outline-none shadow-md font-bold text-white text-2xl shadow-black hover:bg-least' onClick={checkBalance}>CHECK BALANCE</button>
+            }
+            {props.name === 'TOKEN' &&   <DropdownMenu balance={true}/>}</div>}
+          
           <Buttoncrypto image={withdraw} text="WITHDRAW" name={props.name} />
-
+          <div>
+   
+    </div>
         </div>
 
         <div className='flex justify-center m-auto'>
