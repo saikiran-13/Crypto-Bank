@@ -2,16 +2,37 @@
 # Crypto Bank
 
 ![Screenshot](Images/Screenshot%20from%202023-06-30%2009-20-28.png)
+
+
 <br>
+
+
 ![Screenshot](Images/Screenshot%20from%202023-06-30%2009-38-04.png)
+
+
 <br>
+
+
 ![Screenshot](Images/Screenshot%20from%202023-06-30%2009-38-13.png)
+
+
 <br>
+
+
 ![Screenshot](Images/Screenshot%20from%202023-06-30%2009-40-16.png)
+
+
 <br>
+
+
 ![Screenshot](Images/Screenshot%20from%202023-06-30%2009-41-11.png)
+
+
 <br>
+
+
 ![Screenshot](Images/Screenshot%20from%202023-06-30%2009-42-46.png)
+
 
 <br>
 
