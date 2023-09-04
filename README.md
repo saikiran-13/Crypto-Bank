@@ -2,6 +2,7 @@
 # Crypto Bank
 
 ![Screenshot](Images/Screenshot%20from%202023-06-30%2009-20-28.png)
+![Screenshot](Images/Screenshot%20from%202023-06-30%2009-38-04.png)
 
 
 # Getting Started with Create React App
